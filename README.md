@@ -10,25 +10,22 @@ School Personal Project. Based on Binding of Issac
 
 The project is composed of the following major classes:
 
-#### Player
+#### SStats
+* Holds enemy and player stats
+* Holds the abilty to shoot
+* Uses the ```SMasterBulletHolder``` class to read what projectile to shoot
+    - This class holds all of the bullet game objects
+* Uses the ```SShoot``` class to determine projectile speed.
+    - That class determines the projectile velocity and has an on trigger enter for hitting enemies
 
-The ```player``` class has the following responsibilities:
-
-* Input Handling
-* Spawning the view Camera
-* Trigger the Battle Encounter
-* Pass input to the MovementController
-
-#### Movement Controller
-
-The MovementConroller class governs the movement of the character, it uses velocity and the ```CharacterController``` class to govern the move movement of the character. It handles:
-
-* Movement
-* Jump and Gravity
-* Update Animation parameters
-* Convert movement input to world directions
-```C#
- Vector3 PlayerInputToWorldDir(Vector2 inputVal)
-    {
-        Vector3 rightDir = Camera.main.transform.right;
-        Vector3 fwdDir = Vector3.Cross(rightDir, Vector3.up);
+#### SRoom
+* Reads from an array to see it's own ```SDoor``` class
+* This class opens the doors
+#### SDoor
+* When The player collides with an open door the camera instantly moves
+* The previous room is destroyed and a new one is created.
+* An array and a random range is used to simulate randomness in room generation
+ ```C#
+  int randomIndex = Random.Range(0, mRooms.Length);
+        GameObject mRandomRoom = mRooms[randomIndex];
+  ```
