@@ -4,7 +4,7 @@ School Personal Project. Based on Binding of Issac
 
 |Engine | Version|
 |-------|--------|
-|Unity|6000.1.2f1|
+|Unity|6000.0.34f1|
 ----
 ## Structure
 
