@@ -19,7 +19,6 @@ public class SDoor : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("e");
             GenerateRoom();
             mThisRoom.ShutDoors();
             Destroy(mThisRoomObj);
@@ -27,12 +26,10 @@ public class SDoor : MonoBehaviour
     }
     void GenerateRoom()
     {
-        //mRooms = new GameObject[] {};
 
         int randomIndex = Random.Range(0, mRooms.Length);
         GameObject mRandomRoom = mRooms[randomIndex];
 
-        Debug.Log("Random room: " + mRandomRoom.name);
         GameObject mRoomSpawn = Instantiate(mRandomRoom, mRoomSpawnLocation.transform.position, mRoomSpawnLocation.transform.rotation);
     }
 }

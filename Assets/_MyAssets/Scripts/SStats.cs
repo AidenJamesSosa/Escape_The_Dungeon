@@ -86,8 +86,13 @@ public class SStats : MonoBehaviour
     {
         if (mCanFire == true)
         {
-            GameObject attackClone = Instantiate(mWeapon, mWeaponSpawn.transform.position, mWeaponSpawn.transform.rotation);
-            SShoot shootScript = attackClone.GetComponent<SShoot>();
+            GameObject bullet = Instantiate(mWeapon, mWeaponSpawn.position, mWeaponSpawn.rotation);
+            SShoot shootScript = bullet.GetComponent<SShoot>();
+            if (shootScript != null)
+            {
+                shootScript.mStats = this;
+                shootScript.mOwner = this;
+                }
             shootScript.mStats = this;
             mCanFire = false;
             Reload();

@@ -4,11 +4,8 @@ public class SShoot : MonoBehaviour
 {
 
     private Rigidbody mRBody;
-
     public int mBaseAttack; //Damage
     public int mTotalAttack; //Damage + Char Damage Modifier
-
-
     [SerializeField] private float mMoveSpeed; //5
     [SerializeField] private Transform mBulletSpawn;
     [SerializeField] private float mExplosionDelay;
@@ -18,10 +15,7 @@ public class SShoot : MonoBehaviour
     [SerializeField] private bool DestroyOnEnemy; //for player bullets
     [SerializeField] private bool DestroyOnWall; //most will not pierce walls
     public SStats mStats = null;
-
-
-
-
+    public SStats mOwner;
     void Start()
     {
         mRBody = GetComponent<Rigidbody>();
@@ -41,7 +35,6 @@ public class SShoot : MonoBehaviour
             Explode();
         }
     }
-
     private void AddStats()
     {
         mTotalAttack = mBaseAttack + mStats.mAddAttack;
@@ -51,12 +44,52 @@ public class SShoot : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    public void OnTriggerEnter(Collider other)
+   public void OnTriggerEnter(Collider other)
+{
+    if (mHasExploded) return;
+
+    Transform root = other.transform.root;
+    SStats targetStats = root.GetComponent<SStats>();
+
+    // 🔒 Ignore hitting the shooter themselves
+    if (targetStats == mOwner)
     {
-        if (other.tag == "Wall")
-        {
-            Destroy(gameObject);
-        }
+        //Debug.Log("Ignored self-hit");
+        return;
     }
-    
+
+    // ✅ Hits wall
+    if (DestroyOnWall && root.CompareTag("Wall"))
+    {
+        Debug.Log("Wall hit!");
+        Explode();
+        return;
+    }
+
+    // ✅ Hits player
+    if (root.CompareTag("Player"))
+    {
+        Debug.Log($"Bullet hit player: {root.name}");
+        if (targetStats != null)
+        {
+            bool died = targetStats.TakeDamage(mTotalAttack, 1.0f, targetStats.mTotalDefense);
+            if (died) Debug.Log($"{root.name} defeated!");
+        }
+        Explode();
+        return;
+    }
+
+    // ✅ Hits enemy
+    if (root.CompareTag("Enemy"))
+    {
+        Debug.Log($"Bullet hit enemy: {root.name}");
+        if (targetStats != null)
+        {
+            bool died = targetStats.TakeDamage(mTotalAttack, 1.0f, targetStats.mTotalDefense);
+            if (died) Debug.Log($"{root.name} defeated!");
+        }
+        Explode();
+        return;
+    }
+}
 }

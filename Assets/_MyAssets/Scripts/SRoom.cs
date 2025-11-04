@@ -7,28 +7,22 @@ public class SRoom : MonoBehaviour
     [SerializeField] private GameObject[] mDoorsShut;
     [SerializeField] private GameObject mDoorEntered;
 
+    [SerializeField] private bool StartUnlocked;
+    [SerializeField] private bool mEnemyRoom;
+    [SerializeField] private int mEnemyAmount;
+
     public FollowPlayer mFollowPlayer;
 
     void Start()
     {
         ShutDoors();
-        mFollowPlayer = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowPlayer>();
-        mFollowPlayer.mRoomPosition = transform;
-        mFollowPlayer.MoveCamera();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (StartUnlocked == true)
         {
             RoomClear();
         }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            ShutDoors();
-        }
+        mFollowPlayer = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowPlayer>();
+        mFollowPlayer.mRoomPosition = transform;
+        mFollowPlayer.MoveCamera();
     }
     public void RoomClear()
     {

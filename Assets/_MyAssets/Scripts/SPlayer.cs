@@ -25,7 +25,7 @@ public class SPlayer : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.J))
         {
-            Debug.Log("Shoot");
+            //Debug.Log("Shoot");
             mPlayerStats.Shoot();
         }
         if (Input.GetKeyDown(KeyCode.E))
