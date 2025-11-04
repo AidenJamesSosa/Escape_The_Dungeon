@@ -28,7 +28,7 @@ The project is composed of the following major classes:
 |SPlayer | SEnemy|
 |-------|--------|
 |Holds player stats|Holds enemy stats|
-|Allows shoot on command|shoots on timers|
+|Allows shoot on command|Shoots on timers|
 |Allows chest interactions|Chases the player|
 ---
 #### SShoot
