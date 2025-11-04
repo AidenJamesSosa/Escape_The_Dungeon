@@ -36,28 +36,20 @@ The project is composed of the following major classes:
       - Damage, speed, and how long the bullet could be shot
 * Destroys itself when it hits a wall.
 * When stats for ```SStats``` are updated the code updates
+* Reads from ```SMasterBulletHolder``` to grab the respective game object
   ```
   private void AddStats()
     {
         mTotalAttack = mBaseAttack + mStats.mAddAttack;
     }
 ```
-* Reads from ```SMasterBulletHolder``` to grab the respective game object
-
-
 #### SRoom
 * Reads from an array to see it's own ```SDoor``` class
 * This class opens the doors
 * When instantiated the camera controlled by "MCameraMove" is moved overhead this room within ```MCameraMove```'s code
 ```
- public void MoveCamera()
-    {
         Vector3 mNewPosition = new Vector3(mRoomPosition.transform.position.x, mRoomPosition.transform.position.y + mOffset.y,
-                mRoomPosition.transform.position.z + mOffset.z);
-     mCamera.position = mNewPosition;
-
-        StartCoroutine(RebuildNavMeshNextFrame());
-    }
+        mRoomPosition.transform.position.z + mOffset.z);
 ```
 #### SDoor
 * When The player collides with an open door the camera instantly moves
