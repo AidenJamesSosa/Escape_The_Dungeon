@@ -6,6 +6,15 @@ School Personal Project. Based on Binding of Issac
 |-------|--------|
 |Unity|6000.0.34f1|
 ----
+![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.52.57 PM.png)
+
+![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.53.38%E2%80%AFPM.png)
+
+
+
+
+
+
 ## Structure
 
 The project is composed of the following major classes:
@@ -19,11 +28,11 @@ The project is composed of the following major classes:
     - That class determines the projectile velocity and has an on trigger enter for hitting enemies
 
 |#### SPlayer | #### SEnemy|
-|-------------|------------|
+|-------|--------|
 |Holds player stats|Holds enemy stats|
-|------------------|-----------------|
+|-------|--------|
 |Allows shoot on command|shoots on timers|
-|-------------------------|--------------|
+|-------|--------|
 |Allows chest interactions|Chases the player|
 ---
 #### SShoot
