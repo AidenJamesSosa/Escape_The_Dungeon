@@ -40,17 +40,20 @@ The project is composed of the following major classes:
   ```private void AddStats()
     {
         mTotalAttack = mBaseAttack + mStats.mAddAttack;
-    }```
+    }
+  ```
 #### SRoom
 * Reads from an array to see it's own ```SDoor``` class
 * This class opens the doors
 * When instantiated the camera controlled by "MCameraMove" is moved overhead this room within ```MCameraMove```'s code
 ```Vector3 mNewPosition = new Vector3(mRoomPosition.transform.position.x, mRoomPosition.transform.position.y + mOffset.y,
-        mRoomPosition.transform.position.z + mOffset.z);```
+        mRoomPosition.transform.position.z + mOffset.z);
+```
 #### SDoor
 * When The player collides with an open door the camera instantly moves
 * The previous room is destroyed and a new one is created.
 * An array and a random range is used to simulate randomness in room generation
  ```C#
   int randomIndex = Random.Range(0, mRooms.Length);
-        GameObject mRandomRoom = mRooms[randomIndex];```
+        GameObject mRandomRoom = mRooms[randomIndex];
+```
