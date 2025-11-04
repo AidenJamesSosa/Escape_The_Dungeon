@@ -19,11 +19,8 @@ The project is composed of the following major classes:
     - That class determines the projectile velocity and has an on trigger enter for hitting enemies
 
 |#### SPlayer | #### SEnemy|
-|---|---|
 |Holds player stats|Holds enemy stats|
-|---|---|
 |Allows shoot on command|shoots on timers|
-|---|---|
 |Allows chest interactions|Chases the player|
 ---
 #### SShoot
@@ -62,5 +59,3 @@ The project is composed of the following major classes:
   int randomIndex = Random.Range(0, mRooms.Length);
         GameObject mRandomRoom = mRooms[randomIndex];
   ```
-
-
