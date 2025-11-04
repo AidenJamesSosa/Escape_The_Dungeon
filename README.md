@@ -6,9 +6,10 @@ School Personal Project. Based on Binding of Issac
 |-------|--------|
 |Unity|6000.0.34f1|
 ----
-![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.52.57 PM.png)
-
+Starting image
 ![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.53.38%E2%80%AFPM.png)
+
+![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.52.57%E2%80%AFPM.png))
 
 
 
