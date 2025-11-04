@@ -6,15 +6,12 @@ School Personal Project. Based on Binding of Issac
 |-------|--------|
 |Unity|6000.0.34f1|
 ----
-Starting image
+
 ![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.53.38%E2%80%AFPM.png)
+Spawn image
 
-![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.52.57%E2%80%AFPM.png))
-
-
-
-
-
+![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.52.57%E2%80%AFPM.png)
+Player in chest room
 
 ## Structure
 
@@ -28,12 +25,10 @@ The project is composed of the following major classes:
 * Uses the ```SShoot``` class to determine projectile speed.
     - That class determines the projectile velocity and has an on trigger enter for hitting enemies
 
-|#### SPlayer | #### SEnemy|
+|SPlayer | SEnemy|
 |-------|--------|
 |Holds player stats|Holds enemy stats|
-|-------|--------|
 |Allows shoot on command|shoots on timers|
-|-------|--------|
 |Allows chest interactions|Chases the player|
 ---
 #### SShoot
