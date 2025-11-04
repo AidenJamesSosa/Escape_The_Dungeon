@@ -29,3 +29,11 @@ The project is composed of the following major classes:
   int randomIndex = Random.Range(0, mRooms.Length);
         GameObject mRandomRoom = mRooms[randomIndex];
   ```
+#### SPlayer
+* Holds player stats only unique to them
+#### SEnemy
+* Holds enemy stats only unique to them
+* Allows enemies to shoot on a timer
+|#### SPlayer | #### SEnemy|
+|-------|--------|
+|Holds player stats|Holds enemy stats|
