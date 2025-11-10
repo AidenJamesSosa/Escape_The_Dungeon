@@ -45,7 +45,7 @@ The project is composed of the following major classes:
 #### SRoom
 * Reads from an array to see it's own ```SDoor``` class
 * This class opens the doors
-* When instantiated the camera controlled by "MCameraMove" is moved overhead this room within ```MCameraMove```'s code
+* When instantiated the camera controlled by "MMoveCamera" is moved overhead this room within ```MMoveCamera```'s code
 ```Vector3 mNewPosition = new Vector3(mRoomPosition.transform.position.x, mRoomPosition.transform.position.y + mOffset.y,
         mRoomPosition.transform.position.z + mOffset.z);
 ```
@@ -57,3 +57,10 @@ The project is composed of the following major classes:
   int randomIndex = Random.Range(0, mRooms.Length);
         GameObject mRandomRoom = mRooms[randomIndex];
 ```
+#### Lever
+* Opens the doors when shot by any bullets
+
+#### SChest
+* When The player collides with a chest collider the player can press a button to open it
+* Stat chests reads from a list of stat upgrades from ```SStatUpgrade``` to gift the player
+* Weapons chests gives the player a new weapon to shoot with
