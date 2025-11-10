@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3411994334041380458}
   - component: {fileID: 2981946914223891288}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: Fireball_E
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,8 +158,8 @@ MonoBehaviour:
   mMoveSpeed: 5
   mBulletSpawn: {fileID: 0}
   mExplosionDelay: 5
-  DestroyOnPlayer: 0
-  DestroyOnEnemy: 1
+  DestroyOnPlayer: 1
+  DestroyOnEnemy: 0
   DestroyOnWall: 1
   mStats: {fileID: 0}
   mOwner: {fileID: 0}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SChest : MonoBehaviour
 {
@@ -43,6 +44,10 @@ public class SChest : MonoBehaviour
             other.GetComponent<SPlayer>()?.SetCurrentChest(this);
         }
     }
+    public void OnTriggerExit(Collider other)
+    {
+        mPlayer.ChestInRange = false;
+    }
     public void GiveLoot()
     {
         if (mWeaponChest == true)
@@ -61,7 +66,6 @@ public class SChest : MonoBehaviour
                 mOldWeapon = mTransferWeapon;
                 mPlayerStats.GetWeaponStats();
             }
-
         }
         if (mWeaponChest == false)
         {
@@ -72,14 +76,13 @@ public class SChest : MonoBehaviour
                 mStatUpgrades.UpgradeStats();
                 OpenedChest();
             }
-            else
-            {
-                mStatUpgrades.mAffix = mSetAffix;
-                mStatUpgrades.Upgrade = mRandomLoot;
-                mStatUpgrades.RemoveUpgrade();
-                ClosedChest();
-            }
-
+            //else
+            //{
+                //mStatUpgrades.mAffix = mSetAffix;
+                //mStatUpgrades.Upgrade = mRandomLoot;
+                //mStatUpgrades.RemoveUpgrade();
+                //ClosedChest();
+           // }
         }
 
     }

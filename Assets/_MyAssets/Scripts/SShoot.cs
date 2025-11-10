@@ -48,46 +48,32 @@ public class SShoot : MonoBehaviour
 {
     if (mHasExploded) return;
 
-    Transform root = other.transform.root;
-    SStats targetStats = root.GetComponent<SStats>();
 
-    // 🔒 Ignore hitting the shooter themselves
-    if (targetStats == mOwner)
-    {
-        //Debug.Log("Ignored self-hit");
-        return;
-    }
+    SStats targetStats = other.GetComponentInParent<SStats>();
+    if (targetStats == null) return;
+    if (targetStats == mOwner) return;
 
-    // ✅ Hits wall
-    if (DestroyOnWall && root.CompareTag("Wall"))
+    if (DestroyOnWall && (other.CompareTag("Wall") || other.transform.root.CompareTag("Wall")))
     {
         Debug.Log("Wall hit!");
         Explode();
         return;
     }
 
-    // ✅ Hits player
-    if (root.CompareTag("Player"))
+    if (other.CompareTag("Player"))
     {
-        Debug.Log($"Bullet hit player: {root.name}");
-        if (targetStats != null)
-        {
-            bool died = targetStats.TakeDamage(mTotalAttack, 1.0f, targetStats.mTotalDefense);
-            if (died) Debug.Log($"{root.name} defeated!");
-        }
+        Debug.Log($"Bullet hit player: {other.name}");
+        bool died = targetStats.TakeDamage(mTotalAttack, 1.0f, targetStats.mTotalDefense);
+        if (died) Debug.Log($"{other.name} defeated!");
         Explode();
         return;
     }
 
-    // ✅ Hits enemy
-    if (root.CompareTag("Enemy"))
+    if (DestroyOnEnemy && other.CompareTag("Enemy"))
     {
-        Debug.Log($"Bullet hit enemy: {root.name}");
-        if (targetStats != null)
-        {
-            bool died = targetStats.TakeDamage(mTotalAttack, 1.0f, targetStats.mTotalDefense);
-            if (died) Debug.Log($"{root.name} defeated!");
-        }
+        Debug.Log($"Bullet hit enemy: {other.name}");
+        bool died = targetStats.TakeDamage(mTotalAttack, 1.0f, targetStats.mTotalDefense);
+        if (died) Destroy(targetStats.gameObject);
         Explode();
         return;
     }

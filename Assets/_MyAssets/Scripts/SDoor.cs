@@ -21,6 +21,7 @@ public class SDoor : MonoBehaviour
         {
             GenerateRoom();
             mThisRoom.ShutDoors();
+            mThisRoom.DestroyEnemies();
             Destroy(mThisRoomObj);
         }
     }

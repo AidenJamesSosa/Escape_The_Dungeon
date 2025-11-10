@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4922419897188471582}
   - component: {fileID: 8912745855145438880}
   m_Layer: 0
-  m_Name: Enemy Small 1
+  m_Name: Enemy Small 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,6 +268,7 @@ MonoBehaviour:
   mWeaponType: 0
   mWeapon: {fileID: 6460938508462215462, guid: 9cdc28ecb7e3c47889be6c3ec014ecda, type: 3}
   mWeaponSpawn: {fileID: 3286034478788663251}
+  IsPlayer: 0
   mItem: 0
 --- !u!114 &8912745855145438880
 MonoBehaviour:
@@ -281,5 +282,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7559717b310cf42a58959b972cb9536c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SEnemy
-  mShootDelay: 5
+  mShootDelay: 2
   mThisRoomObj: {fileID: 0}

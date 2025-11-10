@@ -1,39 +1,58 @@
 using UnityEngine;
+using System;
+using UnityEditor.Rendering.LookDev;
+using Unity.XR.OpenVR;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SPlayer : MonoBehaviour
 {
-    private SStats mPlayerStats = null;
-
-    private SChest mCurrentChest;
-
     public bool ChestInRange = false;
 
-
+    private SStats mPlayerStats = null;
+    private SChest mCurrentChest = null;
+    private PlayerInputs mPlayerInputs;
+    [SerializeField] private Slider mHealthSlider;
+    public SSceneLoadColor mSceneLoader = null;
 
     void Start()
     {
         mPlayerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<SStats>();
+        mPlayerInputs = new PlayerInputs();
+        mPlayerInputs.Gameplay.Shoot.performed += PlayerShoot;
+        mPlayerInputs.Gameplay.OpenChest.performed += OnOpenChest;
 
+        mPlayerInputs.Gameplay.Enable();
+        mHealthSlider.maxValue = mPlayerStats.mMaxHP;
+        mHealthSlider.value = mPlayerStats.mCurrentHP;
+        SetHP();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        PlayerInputs();
+        PlayerInput();
     }
-    private void PlayerInputs()
+    private void PlayerInput()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //Debug.Log("Shoot");
-            mPlayerStats.Shoot();
+            mSceneLoader.QuitGame();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+    }
+    public void SetHP()
+    {
+        mPlayerStats.mCurrentHP = Mathf.Clamp(mPlayerStats.mCurrentHP, 0, mPlayerStats.mMaxHP);
+        mHealthSlider.value = mPlayerStats.mCurrentHP;
+    }
+    public void PlayerShoot(InputAction.CallbackContext context)
+    {
+        mPlayerStats.Shoot();
+    }
+    private void OnOpenChest(InputAction.CallbackContext context)
+    {
+        if (ChestInRange && mCurrentChest != null)
         {
-            if (ChestInRange == true)
-            {
-                mCurrentChest.GiveLoot();
-            }
+            mCurrentChest.GiveLoot();
         }
     }
     public void SetCurrentChest(SChest chest)

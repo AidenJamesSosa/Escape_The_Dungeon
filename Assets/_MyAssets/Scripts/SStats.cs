@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SStats : MonoBehaviour
 {
@@ -28,17 +29,19 @@ public class SStats : MonoBehaviour
     public int mWeaponType;
     public GameObject mWeapon;
     private SMasterBulletHolder mBulletHolder = null;
+    private SPlayer mPlayer;
     private SShoot mShoot = null;
 
     public Transform mWeaponSpawn;
 
-
+    [SerializeField] private bool IsPlayer = false;
     public int mItem;
 
 
     void Start()
     {
         mBulletHolder = GameObject.FindGameObjectWithTag("GameController").GetComponent<SMasterBulletHolder>();
+        if (IsPlayer == true) mPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<SPlayer>();
         GetWeaponStats();
     }
     public void GetWeaponStats()
@@ -97,7 +100,6 @@ public class SStats : MonoBehaviour
             mCanFire = false;
             Reload();
         }
-
     }
     public bool TakeDamage(int dmg, float weak, int def)
     {
@@ -106,7 +108,10 @@ public class SStats : MonoBehaviour
         if (finalDamage > 0)
         {
             mCurrentHP -= (int)finalDamage;
-            //SetHP();
+            if (IsPlayer == true)
+            {
+                mPlayer.SetHP();
+            }
         }
         if (mCurrentHP <= 0)
         { return true; }

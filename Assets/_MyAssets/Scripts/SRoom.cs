@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+
 
 
 public class SRoom : MonoBehaviour
@@ -8,8 +10,13 @@ public class SRoom : MonoBehaviour
     [SerializeField] private GameObject mDoorEntered;
 
     [SerializeField] private bool StartUnlocked;
-    [SerializeField] private bool mEnemyRoom;
     [SerializeField] private int mEnemyAmount;
+
+    [SerializeField] private GameObject mEnemyPrefab;
+    [SerializeField] private Transform[] mEnemySpawns;
+    private bool mEnemiesSpawned = false;
+
+    private List<GameObject> mSpawnedEnemies = new List<GameObject>();
 
     public FollowPlayer mFollowPlayer;
 
@@ -23,6 +30,7 @@ public class SRoom : MonoBehaviour
         mFollowPlayer = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowPlayer>();
         mFollowPlayer.mRoomPosition = transform;
         mFollowPlayer.MoveCamera();
+        SpawnEnemies();
     }
     public void RoomClear()
     {
@@ -57,5 +65,39 @@ public class SRoom : MonoBehaviour
                 obj.SetActive(true);
             }
         }
+    }
+    public void SpawnEnemies()
+    {
+        if (mEnemyPrefab == null || mEnemySpawns == null) return;
+
+        foreach (Transform spawn in mEnemySpawns)
+        {
+            if (spawn == null) continue;
+
+            GameObject newEnemy = Instantiate(mEnemyPrefab, spawn.position, spawn.rotation);
+            SEnemy enemyScript = newEnemy.GetComponent<SEnemy>();
+
+            if (enemyScript != null)
+            {
+                enemyScript.mThisRoomObj = this.gameObject;
+            }
+
+            mSpawnedEnemies.Add(newEnemy);
+            mEnemyAmount++;
+        }
+    }
+    public void DestroyEnemies()
+    {
+        foreach (GameObject enemy in mSpawnedEnemies)
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy);
+            }
+        }
+
+        mSpawnedEnemies.Clear();
+        mEnemyAmount = 0;
+        mEnemiesSpawned = false;
     }
 }
