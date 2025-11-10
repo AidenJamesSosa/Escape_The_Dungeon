@@ -6,6 +6,13 @@ School Personal Project. Based on Binding of Issac
 |-------|--------|
 |Unity|6000.0.34f1|
 ----
+
+![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.53.38%E2%80%AFPM.png)
+Spawn image
+
+![Game Screenshot](Images/Screenshot%202025-11-04%20at%203.52.57%E2%80%AFPM.png)
+Player in chest room
+
 ## Structure
 
 The project is composed of the following major classes:
@@ -18,12 +25,10 @@ The project is composed of the following major classes:
 * Uses the ```SShoot``` class to determine projectile speed.
     - That class determines the projectile velocity and has an on trigger enter for hitting enemies
 
-|#### SPlayer | #### SEnemy|
-|-------------|------------|
+|SPlayer | SEnemy|
+|-------|--------|
 |Holds player stats|Holds enemy stats|
-|------------------|-----------------|
-|Allows shoot on command|shoots on timers|
-|-------------------------|--------------|
+|Allows shoot on command|Shoots on timers|
 |Allows chest interactions|Chases the player|
 ---
 #### SShoot
@@ -31,28 +36,18 @@ The project is composed of the following major classes:
       - Damage, speed, and how long the bullet could be shot
 * Destroys itself when it hits a wall.
 * When stats for ```SStats``` are updated the code updates
-  ```
-  private void AddStats()
+* Reads from ```SMasterBulletHolder``` to grab the respective game object
+  ```private void AddStats()
     {
         mTotalAttack = mBaseAttack + mStats.mAddAttack;
     }
-```
-* Reads from ```SMasterBulletHolder``` to grab the respective game object
-
-
+  ```
 #### SRoom
 * Reads from an array to see it's own ```SDoor``` class
 * This class opens the doors
 * When instantiated the camera controlled by "MCameraMove" is moved overhead this room within ```MCameraMove```'s code
-```
- public void MoveCamera()
-    {
-        Vector3 mNewPosition = new Vector3(mRoomPosition.transform.position.x, mRoomPosition.transform.position.y + mOffset.y,
-                mRoomPosition.transform.position.z + mOffset.z);
-     mCamera.position = mNewPosition;
-
-        StartCoroutine(RebuildNavMeshNextFrame());
-    }
+```Vector3 mNewPosition = new Vector3(mRoomPosition.transform.position.x, mRoomPosition.transform.position.y + mOffset.y,
+        mRoomPosition.transform.position.z + mOffset.z);
 ```
 #### SDoor
 * When The player collides with an open door the camera instantly moves
@@ -61,4 +56,4 @@ The project is composed of the following major classes:
  ```C#
   int randomIndex = Random.Range(0, mRooms.Length);
         GameObject mRandomRoom = mRooms[randomIndex];
-  ```
+```
